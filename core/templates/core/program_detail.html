@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Program Details - {{ programs.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center mb-4">{{ programs.name }}</h3>
+    <div class="card">
+        <div class="card-header home_colour text-white">
+            <h4>{{ programs.name }}</h4> <h6> {{ programs.category.name }}</h6>
+        </div>
+        <div class="card-body">
+            <p><strong>Time:</strong> {{ programs.time|date:"F j, Y, g:i a" }}</p>
+            
+            <!-- Display each stage associated with the program -->
+            {% if stages %}
+                <p><strong>Stage:</strong> 
+                    {% for stage in stages %}
+                        {{ stage.name }} at {{ stage.place }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            {% else %}
+                <p><strong>Stage:</strong> Not Assigned</p>
+            {% endif %}
+
+            <!-- Display the list of students enrolled in this program -->
+            <div>
+                <h5>Students:</h5>
+                <ul class="list-group">
+                    {% for student in students %}
+                        <li class="list-group-item" style="background-color: #f9f9f9;">
+                            <strong>Name:</strong> {{ student.name }} <br>
+                            <strong>Category:</strong> {{ student.category.name }}
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No students enrolled in this program.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'programs' %}" class="btn home_colour plain-link">Back to Programs List</a>
+    </div>
+</div>
+{% endblock %}

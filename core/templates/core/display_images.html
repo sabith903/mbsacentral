@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Image gallery{% endblock %}
+
+{% block content %}
+
+<div id="gallery" class="image_body">
+    {% for image in images %}
+        <div class="frame {% if forloop.first %}active{% endif %}">
+            <img src="{{ image.image.url }}" alt="{{ image.title }}">
+            <div class="title">{{ image.title }}</div> <!-- Image title overlay -->
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

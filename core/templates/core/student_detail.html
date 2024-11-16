@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ student.name }} - Details{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">{{ student.name }}'s Details</h2>
+
+    <div class="card mb-4 table">
+        <div class="card-header header_colour text-white">
+            Student Information
+        </div>
+        <div class="card-body">
+            <p><strong>Name:</strong><a href="{% url 'student_detail' student_id=student.id %}">{{ student.name }}</a></p>
+            <p><strong>Team:</strong><a href="{% url 'team_detail' team_id=student.team.id %}">{{ student.team.name }}</a></p>
+            <p><strong>Programs:</strong><a href="{% url 'program_detail' program_id=student.program.id %}">{{ student.program.name }}</a></p>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'students' %}" class="btn home_colour plain-link">Back to Students List</a>
+    </div>
+</div>
+{% endblock %}
